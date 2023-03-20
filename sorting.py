@@ -22,6 +22,8 @@ def swapper(solutions):
 
 
 def main():
+    # testing this change
+    A = Evo()
 
     # Create framework
     E = Evo()
