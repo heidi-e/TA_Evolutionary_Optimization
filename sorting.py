@@ -3,16 +3,19 @@ from evo import Evo
 import random as rnd
 
 def sumstepsdown(L):
+    #OBJECTIVE
     """ Objective: Count total magnitude of steps down (larger to smaller value) """
     return sum([x - y for x, y in zip(L, L[1:]) if y < x])
 
 def sumratio(L):
+    #OBJECTIVE
     """ Ratio of sum of first-half values to 2nd half values """
     sz = len(L)
     return round(sum(L[:sz//2]) / sum(L[sz//2+1:]), 5)
 
 
 def swapper(solutions):
+    #AGENT
     """ Swap two random values """
     L = solutions[0]
     i = rnd.randrange(0, len(L))
