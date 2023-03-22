@@ -54,7 +54,7 @@ class Evo:
         self.add_solution(new_solution)
 
 
-    def evolve(self, n=1, dom=100, status=100):
+    def evolve(self, n=1, dom=100, status=100): # add time limit parameter
         """ To run n random agents against the population
         n - # of agent invocations
         dom - # of iterations between discarding the dominated solutions """

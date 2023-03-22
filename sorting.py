@@ -2,6 +2,8 @@
 from evo import Evo
 import random as rnd
 
+
+
 def sumstepsdown(L):
     #OBJECTIVE
     """ Objective: Count total magnitude of steps down (larger to smaller value) """
