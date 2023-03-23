@@ -27,61 +27,21 @@ def time_conflict(test):
 
     for ta in range(test.shape[0]):
         times = sections_df.daytime[test[ta]==1]
-        print(times)
-        print(times.duplicated())
-        print(times.duplicated().sum())
-        conflict += times.duplicated().sum()
+        if times.duplicated().sum() > 0:
+            conflict += 1
 
     return conflict
 
+def under_supp(test):
+    # sum across columns using numpy arrays
+    test = test.to_numpy()
+    actual_assigns = test.sum(axis=0)
 
+    min_assigns = sections_df['min_ta']
 
-    """column, row = np.where(test.T)
-    unique, indices = np.unique(column, return_index=True)
-    res = np.split(row, indices[1:])
-    print(res)"""
+    difference = min_assigns.to_numpy() - actual_assigns
 
-
-    """word = next(i for i, x in
-           enumerate(assigns) if x == True)"""
-
-
-
-    """# Create an empty dictionary to store the sections for each group
-    section_lists = {}
-
-    # Loop through each group and extract the sections into a list
-    for sect_time, group in groups:
-        section_lists[sect_time] = group['section'].tolist()
-
-
-    for ta_id in tas_df["ta_id"]:
-        ta_row = test.loc[[ta_id]]
-
-        col_lst = []
-        for col in ta_row.columns:
-            if ta_row.iloc[0, col] == 1:
-                col_lst.append(col)
-
-
-        for key, val in section_lists.items():
-            intersection = set(col_lst).intersection(set(val))
-
-            if len(intersection) > 1:
-                conflict += 1
-
-                break
-
-
-    return conflict"""
-
-
-
-
-
-
-def under_supp():
-    pass
+    return difference[difference > 0].sum()
 
 def unwilling():
     pass
@@ -94,7 +54,7 @@ def unpreferred():
 
 
 def main():
-    print(time_conflict(test1))
+    print(under_supp(test3))
     '''# Create framework
     E = Evo()
 
