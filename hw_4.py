@@ -22,19 +22,34 @@ def overallo(test):
 
 def time_conflict(test):
 
-    conflict = 0
-    groups = sections_df.groupby(["daytime"])
+    #conflict = 0
+    groups = sections_df["daytime"]
 
-    # Create an empty dictionary to store the sections for each group
+
+    for ta in range(test.shape[0]):
+        print(len(groups))
+        times = sections_df.daytime[test[ta]==1]
+
+        #if len(list(times)) > len(set(times))
+
+
+    """column, row = np.where(test.T)
+    unique, indices = np.unique(column, return_index=True)
+    res = np.split(row, indices[1:])
+    print(res)"""
+
+
+    """word = next(i for i, x in
+           enumerate(assigns) if x == True)"""
+
+
+
+    """# Create an empty dictionary to store the sections for each group
     section_lists = {}
 
     # Loop through each group and extract the sections into a list
     for sect_time, group in groups:
         section_lists[sect_time] = group['section'].tolist()
-
-    """# Print the section lists for each group
-    for sect_time, sections in section_lists.items():
-        print(f"Sections for Designated Time {sect_time}: {sections}")"""
 
 
     for ta_id in tas_df["ta_id"]:
@@ -55,7 +70,7 @@ def time_conflict(test):
                 break
 
 
-    return conflict
+    return conflict"""
 
 
 
@@ -76,7 +91,7 @@ def unpreferred():
 
 
 def main():
-    print(overallo(test1))
+    print(time_conflict(test1))
     '''# Create framework
     E = Evo()
 
