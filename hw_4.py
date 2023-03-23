@@ -22,15 +22,18 @@ def overallo(test):
 
 def time_conflict(test):
 
-    #conflict = 0
-    groups = sections_df["daytime"]
-
+    conflict = 0
+    test = test.to_numpy()
 
     for ta in range(test.shape[0]):
-        print(len(groups))
         times = sections_df.daytime[test[ta]==1]
+        print(times)
+        print(times.duplicated())
+        print(times.duplicated().sum())
+        conflict += times.duplicated().sum()
 
-        #if len(list(times)) > len(set(times))
+    return conflict
+
 
 
     """column, row = np.where(test.T)
