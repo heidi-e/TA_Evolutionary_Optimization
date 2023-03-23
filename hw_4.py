@@ -1,5 +1,6 @@
 from evo import Evo
 import pandas as pd
+import numpy as np
 
 # read in data for global variables
 sections_df = pd.read_csv("sections.csv")
@@ -9,30 +10,15 @@ test2 = pd.read_csv("test2.csv", header = None)
 test3 = pd.read_csv("test3.csv", header = None)
 
 
-
-
-
 def overallo(test):
-    # sum across the row
-    # extract the ta csv
+    # sum across the row using numpy arrays
 
-    penalties = 0
-    for ta_id in tas_df["ta_id"]:
-        assignments = 0
-        ta_row = test.loc[[ta_id]]
+    total_assigns = test.sum(axis=1)
+    max_assigns = tas_df['max_assigned']
 
+    difference = total_assigns.to_numpy() - max_assigns.to_numpy()
 
-        for col in ta_row.columns:
-            if ta_row.iloc[0, col] == 1:
-                assignments+=1
-
-
-        difference = (assignments - tas_df.loc[ta_id, "max_assigned"])
-        if difference > 0:
-            penalties += difference
-
-    return penalties
-
+    return difference[difference > 0].sum()
 
 def time_conflict(test):
 
@@ -90,7 +76,7 @@ def unpreferred():
 
 
 def main():
-    print(time_conflict(test3))
+    print(overallo(test1))
     '''# Create framework
     E = Evo()
 
