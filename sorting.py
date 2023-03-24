@@ -44,11 +44,15 @@ def main():
     E.add_solution(L)
     print(E)
 
+    E.run_agent("swapper")
+    print(E)
+
+
     # Run the evolver
-    E.evolve(100000000, 100, 100000)
+    #E.evolve(100000000, 100, 100000)
 
     # Print final results
-    print(E)
+    #print(E)
 
 
 if __name__ == '__main__':

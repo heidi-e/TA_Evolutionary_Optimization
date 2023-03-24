@@ -14,7 +14,10 @@ def overallo(test):
 
     # sum across the row using numpy arrays
 
+    # number of times
     total_assigns = test.sum(axis=1)
+
+    # number of sections the TA prefers
     max_assigns = tas_df['max_assigned']
 
     difference = total_assigns.to_numpy() - max_assigns.to_numpy()
