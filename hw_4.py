@@ -49,6 +49,19 @@ def under_supp(test):
 
 def unwilling(test):
 
+    # finds column index of which sections TA inputted as unwilling
+    # true = unwilling
+    count = tas_df.loc[:, '0':] == 'U'
+
+    # compares TA preference to their assignment
+    # true = TA assignment matches unwilling index
+    all_sum = (np.array(count) & test).sum()
+
+    return all_sum.sum()
+
+
+"""
+
     conflict = 0
     test = test.to_numpy()
 
@@ -60,10 +73,20 @@ def unwilling(test):
             assign = tas_df.iloc[ta, val + 3] == 'U'
             conflict += assign.sum()
 
-    return conflict
+    return conflict"""
 
 def unpreferred(test):
-    conflict = 0
+    # finds column index of which sections TA inputted as willing
+    # true = willing
+    count = tas_df.loc[:, '0':] == 'W'
+
+    # compares TA preference to their assignment
+    # true = TA assignment matches willing index
+    all_sum = (np.array(count) & test).sum()
+
+    return all_sum.sum()
+
+""" conflict = 0
     test = test.to_numpy()
 
     for ta in range(test.shape[0]):
@@ -71,7 +94,11 @@ def unpreferred(test):
             assign = tas_df.iloc[ta, val + 3] == 'W'
             conflict += assign.sum()
 
-    return conflict
+    return conflict"""
+
+# AGENT IDEA
+#randomly adding/removing a ta from a section
+
 
 def swapper(solutions):
     #AGENT
@@ -132,7 +159,8 @@ def swap_unwilling(test, ta_file):
 
 def main():
 
-    # Create framework
+    print(unpreferred(test3))
+    """# Create framework
     E = Evo()
 
     # Register the five objectives
@@ -156,7 +184,7 @@ def main():
     E.run_agent("minimize_overallo")
     #E.evolve(100000000, 100, 100000)
 
-    print(E)
+    print(E)"""
 
 
 if __name__ == '__main__':
