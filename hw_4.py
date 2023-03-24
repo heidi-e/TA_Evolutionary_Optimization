@@ -43,8 +43,23 @@ def under_supp(test):
 
     return difference[difference > 0].sum()
 
-def unwilling():
-    pass
+def unwilling(test):
+    conflict = 0
+    test = test.to_numpy()
+
+
+    for ta in range(test.shape[0]):
+        for val in np.where(test[ta]==1):
+            #print(tas_df.iloc[ta, np.where(test[0]==1)])
+            assign = tas_df.iloc[ta, val] == 'U'
+            print(assign)
+            conflict += assign.sum()
+
+    return conflict
+
+
+
+    #print(tas_df.iloc[0, test[0]])
 
 
 def unpreferred():
@@ -54,7 +69,7 @@ def unpreferred():
 
 
 def main():
-    print(under_supp(test3))
+    print(unwilling(test1))
     '''# Create framework
     E = Evo()
 
