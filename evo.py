@@ -2,6 +2,7 @@
 import random as rnd
 import copy
 from functools import reduce
+import time
 
 # test
 class Evo:
@@ -54,13 +55,21 @@ class Evo:
         self.add_solution(new_solution)
 
 
-    def evolve(self, n=1, dom=100, status=100): # add time limit parameter
+    def evolve(self, n=1, dom=100, status=100, time_limit=600): # add time limit parameter
         """ To run n random agents against the population
         n - # of agent invocations
-        dom - # of iterations between discarding the dominated solutions """
+        dom - # of iterations between discarding the dominated solutions
+        time_limit - the number of seconds to run the optimizer """
+
+        # find the start time
+        start_time = time.time()
 
         agent_names = list(self.agents.keys())
+
         for i in range(n):
+            # check the time limit when running loop
+            if time.time() - start_time > time_limit:
+                break
             pick = rnd.choice(agent_names) # pick an agent to run
             self.run_agent(pick)
             if  i % dom == 0:
@@ -74,6 +83,7 @@ class Evo:
 
         # Clean up population
         self.remove_dominated()
+
 
     @staticmethod
     def _dominates(p, q):

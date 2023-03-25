@@ -9,8 +9,31 @@ test2 = pd.read_csv("test2.csv", header = None)
 test3 = pd.read_csv("test3.csv", header = None)
 
 
+def unwilling(test):
+    conflict = 0
+    test = test.to_numpy()
+
+    # iterate through all TAs
+    for ta in range(test.shape[0]):
+        # find index of section that the TA was allocated to
+        for val in np.where(test[ta] == 1):
+            # check if TA is unwilling to support that section index
+            assign = tas_df.iloc[ta, val + 3] == 'U'
+            conflict += assign.sum()
+
+    return conflict
 
 
+def unpreferred(test):
+    conflict = 0
+    test = test.to_numpy()
+
+    for ta in range(test.shape[0]):
+        for val in np.where(test[ta] == 1):
+            assign = tas_df.iloc[ta, val + 3] == 'W'
+            conflict += assign.sum()
+
+    return conflict
 
 def overallo(test):
     # sum across the row

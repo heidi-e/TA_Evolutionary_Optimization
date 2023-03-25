@@ -1,6 +1,7 @@
 from evo import Evo
 import pandas as pd
 import numpy as np
+import random as rnd
 
 # read in data for global variables
 sections_df = pd.read_csv("sections.csv")
@@ -49,69 +50,72 @@ def under_supp(test):
 
 def unwilling(test):
 
+    test = test.to_numpy()
     # finds column index of which sections TA inputted as unwilling
     # true = unwilling
     count = tas_df.loc[:, '0':] == 'U'
 
     # compares TA preference to their assignment
     # true = TA assignment matches unwilling index
-    all_sum = (np.array(count) & test).sum()
+    return (np.array(count) & test).sum()
 
-    return all_sum.sum()
-
-
-"""
-
-    conflict = 0
-    test = test.to_numpy()
-
-    # iterate through all TAs
-    for ta in range(test.shape[0]):
-        # find index of section that the TA was allocated to
-        for val in np.where(test[ta]==1):
-            # check if TA is unwilling to support that section index
-            assign = tas_df.iloc[ta, val + 3] == 'U'
-            conflict += assign.sum()
-
-    return conflict"""
 
 def unpreferred(test):
+    test = test.to_numpy()
     # finds column index of which sections TA inputted as willing
     # true = willing
+
     count = tas_df.loc[:, '0':] == 'W'
 
     # compares TA preference to their assignment
     # true = TA assignment matches willing index
-    all_sum = (np.array(count) & test).sum()
-
-    return all_sum.sum()
-
-""" conflict = 0
-    test = test.to_numpy()
-
-    for ta in range(test.shape[0]):
-        for val in np.where(test[ta] == 1):
-            assign = tas_df.iloc[ta, val + 3] == 'W'
-            conflict += assign.sum()
-
-    return conflict"""
-
-# AGENT IDEA
-#randomly adding/removing a ta from a section
+    return (np.array(count) & test).sum()
 
 
-def swapper(solutions):
-    #AGENT
-    """ Swap two random values """
-    L = solutions[0]
-    i = rnd.randrange(0, len(L))
-    j = rnd.randrange(0, len(L))
-    L[i], L[j] = L[j], L[i]
-    return L
+def swap_assignment(solutions):
+
+
+    solution = solutions[len(solutions) - 1]
+
+    # select a random row
+    i = rnd.randrange(0, len(solution))
+
+    # select a random column
+    j = rnd.randrange(0, len(solution.columns))
+
+    # swap out the assignment of a ta (change from 0 to 1 or vice versa)
+    solution.loc[i, j] = int((solution.loc[i, j]) and False)
+
+
+
+    return solution
+    
+    #int(x and False)
+
+
+def swap_ta(solutions):
+    # swap two ta's scheduled assignments
+    solution = solutions[len(solutions) - 1]
+
+    # select a random section
+    j = rnd.randrange(0, len(solution.columns))
+
+    # select a random ta
+    i = rnd.randrange(0, len(solution))
+
+    # select another random ta
+    w = rnd.randrange(0, len(solution))
+
+    # swapping their assignments
+    solution.iloc[i, j], solution.iloc[w, j] = solution.iloc[w, j], solution.iloc[i, j]
+
+    return solution
+
+
 
 def minimize_overallo(solutions):
     #AGENT
-    """ yeet a TA from sections if they are overallocated and place them in a section that they are willing to be in"""
+    """ drop a TA from sections if they are overallocated and place them in a section that they are willing to be in"""
 
     #solutions = pd.DataFrame(solutions)
 
@@ -146,21 +150,9 @@ def swap_unwilling(test, ta_file):
     pass
 
 
-
-    """for
-     
-        L = solutions[0]
-        i = rnd.randrange(0, len(L))
-        j = rnd.randrange(0, len(L))
-        L[i], L[j] = L[j], L[i]
-    
-    return L"""
-
-
 def main():
 
-    print(unpreferred(test3))
-    """# Create framework
+    # Create framework
     E = Evo()
 
     # Register the five objectives
@@ -170,7 +162,7 @@ def main():
     E.add_fitness_criteria("unwilling", unwilling)
     E.add_fitness_criteria("unpreferred", unpreferred)
 
-    # Register some agents
+    # Register the agents
     E.add_agent("minimize_overallo", minimize_overallo, k=1)
     
     # Seed the population with an initial random solution
@@ -180,11 +172,13 @@ def main():
     #E.add_solution(test2)
     #E.add_solution(test3)
     # Run the evolver
+    print(E)
 
-    E.run_agent("minimize_overallo")
-    #E.evolve(100000000, 100, 100000)
+    # Run the evolver
+    E.evolve(100000000, 100, 100000, 10)
 
-    print(E)"""
+    # Print final results
+    print(E)
 
 
 if __name__ == '__main__':

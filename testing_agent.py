@@ -10,6 +10,9 @@ test2 = pd.read_csv("test2.csv", header=None)
 test3 = pd.read_csv("test3.csv", header=None)
 
 
+
+
+
 def overallo(test):
     # sum across the row using numpy arrays
 
@@ -112,11 +115,19 @@ def another_agent(test):
             j = 1
             L[i], L[j] = L[j], L[i]"""
 
-
+def swapper(solutions):
+    #AGENT
+    """ Swap two random values """
+    L = solutions[0]
+    print(len(L))
+    """i = rnd.randrange(0, len(L))
+    j = rnd.randrange(0, len(L))
+    L[i], L[j] = L[j], L[i]
+    return L"""
 
 def main():
 
-    print(another_agent(test1))
+    print(un(test1))
     """# Create framework
     E = Evo()
 
