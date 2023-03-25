@@ -16,6 +16,10 @@ class Evo:
         """ The size of the solution population """
         return len(self.pop)
 
+    def evo_keys(self):
+        """ The keys of the solution population """
+        return (self.pop)
+
     def add_fitness_criteria(self, name, f):
         """ Registering an objective with the Evo framework
         name - The name of the objective (string)

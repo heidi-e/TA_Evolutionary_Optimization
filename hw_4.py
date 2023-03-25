@@ -2,6 +2,9 @@ from evo import Evo
 import pandas as pd
 import numpy as np
 import random as rnd
+import json
+import ast
+import csv
 
 # read in data for global variables
 sections_df = pd.read_csv("sections.csv")
@@ -157,7 +160,7 @@ def main():
 
     # Register the five objectives
     E.add_fitness_criteria("overallocations", overallo)
-    E.add_fitness_criteria("time_conflicts", time_conflict)
+    E.add_fitness_criteria("conflicts", time_conflict)
     E.add_fitness_criteria("undersupport", under_supp)
     E.add_fitness_criteria("unwilling", unwilling)
     E.add_fitness_criteria("unpreferred", unpreferred)
@@ -171,14 +174,21 @@ def main():
     E.add_solution(test1)
     #E.add_solution(test2)
     #E.add_solution(test3)
+
     # Run the evolver
     print(E)
 
     # Run the evolver
-    E.evolve(100000000, 100, 100000, 10)
+    E.evolve(100000000, 100, 100000, 5)
 
     # Print final results
     print(E)
+
+
+    print("Hello")
+    print(pd.DataFrame((list(E.evo_keys().keys())[-1])))
+    # Format results into csv file
+    #d.DataFrame(table_dict.keys()[len(table_dict.keys() - 1)]).to_csv("summary_table.csv")
 
 
 if __name__ == '__main__':
