@@ -17,8 +17,6 @@ test3 = pd.read_csv("test3.csv", header = None)
 def overallo(test):
 
     # sum across the row using numpy arrays
-
-    # number of times
     total_assigns = test.sum(axis=1)
 
     # number of sections the TA prefers
@@ -172,8 +170,8 @@ def main():
     N = 50
 
     E.add_solution(test1)
-    #E.add_solution(test2)
-    #E.add_solution(test3)
+    E.add_solution(test2)
+    E.add_solution(test3)
 
     # Run the evolver
     print(E)
@@ -184,9 +182,13 @@ def main():
     # Print final results
     print(E)
 
+    # compile final solution into dataframe
+    sol_df = pd.DataFrame((list(E.evo_keys().keys())[-1]))
+    print(sol_df)
 
-    print("Hello")
-    print(pd.DataFrame((list(E.evo_keys().keys())[-1])))
+    # format solution into csv file
+    #sol_df.to_csv("summary_table.csv")
+
     # Format results into csv file
     #d.DataFrame(table_dict.keys()[len(table_dict.keys() - 1)]).to_csv("summary_table.csv")
 
