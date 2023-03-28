@@ -151,6 +151,25 @@ def swap_unwilling(test, ta_file):
     pass
 
 
+def output_sol(evo_keys):
+    # output the solutions into a summary table
+    count = 0
+    list_sol = []
+    for solution in ((list(evo_keys.keys()))):
+        count += 1
+        sol_dict = dict(solution)
+        sol_dict["groupname"] = "non_dom"
+        list_sol.append(sol_dict)
+
+
+    # set up csv file
+    field_names = ['groupname','overallocations', 'conflicts', 'undersupport', 'unwilling', 'unpreferred']
+    with open('final_summary_table.csv', 'w') as csvfile:
+        writer = csv.DictWriter(csvfile, fieldnames=field_names)
+        writer.writeheader()
+        writer.writerows(list_sol)
+
+
 def main():
 
     # Create framework
@@ -173,24 +192,17 @@ def main():
     E.add_solution(test2)
     E.add_solution(test3)
 
-    # Run the evolver
-    print(E)
+
 
     # Run the evolver
     E.evolve(100000000, 100, 100000, 5)
 
     # Print final results
+    output_sol(E.evo_keys())
+
+    # Run the evolver
     print(E)
 
-    # compile final solution into dataframe
-    sol_df = pd.DataFrame((list(E.evo_keys().keys())[-1]))
-    print(sol_df)
-
-    # format solution into csv file
-    #sol_df.to_csv("summary_table.csv")
-
-    # Format results into csv file
-    #d.DataFrame(table_dict.keys()[len(table_dict.keys() - 1)]).to_csv("summary_table.csv")
 
 
 if __name__ == '__main__':
