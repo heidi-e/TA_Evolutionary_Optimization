@@ -2,19 +2,18 @@ from evo import Evo
 import pandas as pd
 import numpy as np
 import random as rnd
-import json
-import ast
 import csv
 
-# read in data for global variables
+# read in data files and make global variables for each file
 sections_df = pd.read_csv("sections.csv")
 tas_df = pd.read_csv("tas.csv")
-test1 = pd.read_csv("test1.csv", header = None)
-test2 = pd.read_csv("test2.csv", header = None)
-test3 = pd.read_csv("test3.csv", header = None)
+test1 = pd.read_csv("test1.csv", header=None)
+test2 = pd.read_csv("test2.csv", header=None)
+test3 = pd.read_csv("test3.csv", header=None)
 
 
 def overallo(test):
+    """Objective: Count number of times a ta is overallocated based on their availability"""
 
     # sum across the row using numpy arrays
     total_assigns = test.sum(axis=1)
@@ -22,12 +21,15 @@ def overallo(test):
     # number of sections the TA prefers
     max_assigns = tas_df['max_assigned']
 
+    # calculate the difference between how much a ta is allocated vs how much they would like to be allocated
     difference = total_assigns.to_numpy() - max_assigns.to_numpy()
 
     return difference[difference > 0].sum()
 
 def time_conflict(test):
+    """Objective: Count time conflict for each TA. Multiple time conflicts still count as one time conflict"""
 
+    # variable storing each of the time conflicts
     conflict = 0
     test = test.to_numpy()
 
@@ -39,17 +41,24 @@ def time_conflict(test):
     return conflict
 
 def under_supp(test):
-    # sum across columns using numpy arrays
+    """Objective: Count how many TAs are missing from each section"""
+
+    # turn the test into a numpy array
     test = test.to_numpy()
+
+    # calculates how many times TAs are assigned to each section
     actual_assigns = test.sum(axis=0)
 
+    # variable for the minimum amount of TAs needed for each section
     min_assigns = sections_df['min_ta']
 
+    # difference between the actual assigned and minimum assigned
     difference = min_assigns.to_numpy() - actual_assigns
 
     return difference[difference > 0].sum()
 
 def unwilling(test):
+    """Objective: Count how many times TAs are supporting a section they are unwilling to support"""
 
     test = test.to_numpy()
     # finds column index of which sections TA inputted as unwilling
@@ -62,6 +71,8 @@ def unwilling(test):
 
 
 def unpreferred(test):
+    """Objective: Count how many times TAs are supporting a section they do not preffer to support"""
+
     test = test.to_numpy()
     # finds column index of which sections TA inputted as willing
     # true = willing
@@ -209,11 +220,21 @@ def main():
 
 
     # Run the evolver
-    E.evolve(100000000, 100, 100000, 600)
+    E.evolve(100000000, 100, 100000, 6)
 
     print(E)
 
     output_sol(E.evo_keys())
+
+    """# Print final results
+    output_sol(E.evo_keys())
+
+    solutions = list(E.evo_keys().values())
+
+    best_sol_index = best_sol()
+
+    # Run the evolver
+    print(solutions[best_sol_index])"""
 
 
 
