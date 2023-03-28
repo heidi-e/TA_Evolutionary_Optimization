@@ -209,7 +209,7 @@ def main():
 
 
     # Run the evolver
-    E.evolve(100000000, 100, 10000, 600)
+    E.evolve(100000000, 100, 100000, 600)
 
     print(E)
 
