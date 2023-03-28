@@ -170,6 +170,20 @@ def output_sol(evo_keys):
         writer.writerows(list_sol)
 
 
+def best_sol():
+
+    summary_array = np.genfromtxt("Final_summary_table.csv", delimiter=',', skip_header=1)
+
+    summary_array[np.isnan(summary_array)] = 0
+
+    print(summary_array.sum(axis=1))
+
+    best_sol_index = np.argmin(summary_array.sum(axis=1))
+
+    print(best_sol_index)
+
+    return best_sol_index
+
 def main():
 
     # Create framework
@@ -189,19 +203,25 @@ def main():
     N = 50
 
     E.add_solution(test1)
-    E.add_solution(test2)
-    E.add_solution(test3)
+    #E.add_solution(test2)
+    #E.add_solution(test3)
 
 
 
     # Run the evolver
-    E.evolve(100000000, 100, 100000, 600)
+    E.evolve(100000000, 100, 100000, 60)
 
-    # Print final results
+    print(E)
+
+    """# Print final results
     output_sol(E.evo_keys())
 
+    solutions = list(E.evo_keys().values())
+
+    best_sol_index = best_sol()
+
     # Run the evolver
-    print(E)
+    print(solutions[best_sol_index])"""
 
 
 
