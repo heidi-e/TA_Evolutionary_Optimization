@@ -215,16 +215,6 @@ def main():
 
     output_sol(E.evo_keys())
 
-    """# Print final results
-    output_sol(E.evo_keys())
-
-    solutions = list(E.evo_keys().values())
-
-    best_sol_index = best_sol()
-
-    # Run the evolver
-    print(solutions[best_sol_index])"""
-
 
 
 if __name__ == '__main__':
