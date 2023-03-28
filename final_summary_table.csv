@@ -1,0 +1,14 @@
+groupname,overallocations,conflicts,undersupport,unwilling,unpreferred
+non_dom,7,4,6,23,15
+non_dom,37,8,1,53,15
+non_dom,41,5,0,58,19
+non_dom,15,2,4,32,19
+non_dom,2,1,10,19,19
+non_dom,23,2,7,43,10
+non_dom,8,1,15,28,10
+non_dom,8,5,5,24,15
+non_dom,6,4,7,22,15
+non_dom,17,7,4,33,15
+non_dom,4,1,16,24,10
+non_dom,13,1,12,33,10
+non_dom,5,1,9,22,19
