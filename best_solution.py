@@ -13,3 +13,7 @@ lowest = np.argmin(summary_array.sum(axis=1))
 print(summary_array[lowest])
 
 
+
+
+
+
