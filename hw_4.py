@@ -85,6 +85,7 @@ def unpreferred(test):
 
 
 def swap_assignment(solutions):
+    """AGENT: Randomly swap TAs from an assigned class to an unassigned class (or vice versa)"""
 
 
     solution = solutions[len(solutions) - 1]
@@ -106,7 +107,9 @@ def swap_assignment(solutions):
 
 
 def swap_ta(solutions):
-    # swap two ta's scheduled assignments
+    """AGENT: Swap two random TAs' scheduled assignments"""
+
+    # variable containing the last solution in our population
     solution = solutions[len(solutions) - 1]
 
     # select a random section
@@ -163,17 +166,14 @@ def swap_unwilling(test, ta_file):
 
 
 def output_sol(evo_keys):
-    # output the solutions into a summary table
-    count = 0
+    """output the solutions into a summary table """
     list_sol = []
     for solution in ((list(evo_keys.keys()))):
-        count += 1
         sol_dict = dict(solution)
         sol_dict["groupname"] = "non_dom"
         list_sol.append(sol_dict)
 
-
-    # set up csv file
+    # set up csv file and add list to csv file
     field_names = ['groupname','overallocations', 'conflicts', 'undersupport', 'unwilling', 'unpreferred']
     with open('final_summary_table.csv', 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=field_names)
@@ -209,9 +209,9 @@ def main():
 
     # Register the agents
     E.add_agent("minimize_overallo", minimize_overallo, k=1)
-    
-    # Seed the population with an initial random solution
-    N = 50
+    E.add_agent("swap_ta", swap_ta, k=1)
+    E.add_agent("swap_assignment", swap_assignment, k=1)
+
 
     E.add_solution(test1)
     #E.add_solution(test2)
@@ -220,21 +220,11 @@ def main():
 
 
     # Run the evolver
-    E.evolve(100000000, 100, 100000, 6)
+    E.evolve(100000000, 100, 100000, 600)
 
     print(E)
 
     output_sol(E.evo_keys())
-
-    """# Print final results
-    output_sol(E.evo_keys())
-
-    solutions = list(E.evo_keys().values())
-
-    best_sol_index = best_sol()
-
-    # Run the evolver
-    print(solutions[best_sol_index])"""
 
 
 

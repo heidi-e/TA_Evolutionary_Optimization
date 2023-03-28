@@ -1,55 +1,3 @@
-
-ta_id, ta_name, ta_section
-001, conor, [1,2,3,4,5]
-002, bob, [2,3,5,6,]
-
-ta_id,name,section
-0,Agarwal S,[]
-1,Aggarwal M,[]
-2,Ahmed M, []
-3,Arora A,[]
-4,Arora I,[]
-5,Bhamidipati M,[]
-6,Boehm S,[]
-7,Browne L,[]
-8,Cassway R,[]
-9,Chandra D,[]
-10,Chandrashekhar S,[]
-11,Chenthilkannan A,[]
-12,Duzgun Z,[]
-13,Gong J,[]
-14,He C,[]
-15,Hegde N,[]
-16,Hsiao A,[]
-17,Kedharnath S,[]
-18,Kota S,[]
-19,Kulik J,[]
-20,Kurra P,[]
-21,Lanman K,[]
-22,Levi Cc,[]
-23,Merkle S,[]
-24,Nidadavolu A,[]
-25,Noto S,[]
-26,Nukala S,[]
-27,Pogrebitskiy D,[]
-28,Ritcheson S,[]
-29,Rivera A,[]
-30,Senthil Kumaran []
-31,Shah F,[]
-32,Shenoy P,[]
-33,Shiflett A,[]
-34,Shroff R,[]
-35,Sreepada S,[]
-36,Stochaj K,[]
-37,Sukhatankar S,[]
-38,Thakkar P,[]
-39,Tunney B,[]
-40,Waterson R,[]
-41,Weigel V,[]
-42,Yang R,[]
-
-
-{'overallocations': 0, 'conflicts': 0, 'undersupport': 13, 'unwilling': 10, 'unpreferred': 8}:	    0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16
  0    0   0   0   0   0   0   0   0   1   0   0   0   0   0   0   0   0
  1    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
  2    0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1   0
@@ -93,11 +41,3 @@ ta_id,name,section
  40   1   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
  41   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   1
  42   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0   0
-
-
-
-
-
-
-
-
