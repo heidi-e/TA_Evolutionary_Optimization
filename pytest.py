@@ -2,7 +2,7 @@
 Unit tests for stack.py
 """
 
-from hw_4.py import hw_4
+from hw_4.py import overallo, time_conflict, undersupp, unwilling_obj, unpreferred_obj
 import pytest
 
 from evo import Evo
@@ -10,11 +10,6 @@ import pandas as pd
 import numpy as np
 import random as rnd
 import csv
-
-# read the given files and turn them into dataframes
-sections_df = pd.read_csv("sections.csv")
-tas_df = pd.read_csv("tas.csv")
-
 
 
 @pytest.fixture
@@ -31,16 +26,17 @@ def test_overallocations(read_files):
     test1, test2, test3 = read_files
 
     assert overallo(test1) == 37, 'Overallocation for test1 did not equal 37'
-    assert overallo(test2) == 41, 'Overallocation for test1 did not equal 41'
-    assert overallo(test3) == 23, 'Overallocation for test1 did not equal 41'
+    assert overallo(test2) == 41, 'Overallocation for test2 did not equal 41'
+    assert overallo(test3) == 23, 'Overallocation for test3 did not equal 23'
 
 
-def test_time_conflict():
-    s = Stack()
-    s.push(1)
-    s.push(2)
-    s.push(3)
-    return s
+def test_time_conflict(read_files):
+
+    test1, test2, test3 = read_files
+
+    assert time_conflict(test1) == 8, 'Time conflict for test1 did not equal 8'
+    assert time_conflict(test2) == 5, 'Time conflict for test2 did not equal 5'
+    assert time_conflict(test3) == 2, 'Time conflict for test3 did not equal 2'
 
 
 def under_supp():
