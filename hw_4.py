@@ -209,9 +209,11 @@ def main():
 
 
     # Run the evolver
-    E.evolve(100000000, 100, 100000, 60)
+    E.evolve(100000000, 100, 100000, 600)
 
     print(E)
+
+    output_sol(E.evo_keys())
 
     """# Print final results
     output_sol(E.evo_keys())
