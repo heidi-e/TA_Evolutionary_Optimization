@@ -181,20 +181,6 @@ def output_sol(evo_keys):
         writer.writerows(list_sol)
 
 
-def best_sol():
-
-    summary_array = np.genfromtxt("Final_summary_table.csv", delimiter=',', skip_header=1)
-
-    summary_array[np.isnan(summary_array)] = 0
-
-    print(summary_array.sum(axis=1))
-
-    best_sol_index = np.argmin(summary_array.sum(axis=1))
-
-    print(best_sol_index)
-
-    return best_sol_index
-
 def main():
 
     # Create framework
