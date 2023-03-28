@@ -44,7 +44,6 @@ def overallo(test):
         assignments = 0
         ta_row = test.loc[[ta_id]]
 
-
         for col in ta_row.columns:
             if ta_row.iloc[0, col] == 1:
                 assignments+=1
