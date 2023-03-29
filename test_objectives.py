@@ -3,15 +3,12 @@ Unit tests for hw_4.py
 """
 import pytest
 
-from hw_4 import overallo, time_conflict, under_supp, unwilling, unpreferred
+from final_hw_4 import overallo, time_conflict, under_supp, unwilling, unpreferred
 import evo
 import test_objectives
 
 from evo import Evo
 import pandas as pd
-import numpy as np
-import random as rnd
-import csv
 
 
 @pytest.fixture

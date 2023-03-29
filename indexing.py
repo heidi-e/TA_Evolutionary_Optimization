@@ -1,10 +1,7 @@
 import numpy as np
 
 
-file = 'solutionss.txt'
-
-
-File_data = np.loadtxt(file, dtype=int)
+File_data = np.loadtxt('solutionss.txt', dtype=int)
 
 
 print(np.argwhere(File_data==1))
